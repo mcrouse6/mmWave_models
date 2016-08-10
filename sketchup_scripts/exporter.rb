@@ -28,6 +28,7 @@ OPTIONS = {
   'stl_format'     => STL_ASCII
 }
 
+
 PREF_KEY = 'CommunityExtensions\STL\Exporter'.freeze
 
 def self.file_extension

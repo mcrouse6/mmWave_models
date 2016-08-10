@@ -8,12 +8,7 @@ require 'exporter'
 
 # Add a menu item to launch our plugin.
 UI.menu("Plugins").add_item("Make Room") {
-  SKETCHUP_CONSOLE.show
-  prompts = ["Height (Meters)", "Length", "Width"]
-  defaults = ["3", "3", "3"]
-  input = UI.inputbox(prompts, defaults, "How to Gen Room")
-  draw_room input
-  do_options
+  prompt
 }
 
 def draw_room(input)
@@ -31,3 +26,12 @@ def draw_room(input)
   face = entities.add_face pt1, pt2, pt3, pt4
   face.pushpull -1*height
 end
+
+# def prompt()
+#   SKETCHUP_CONSOLE.show
+#   prompts = ["Height (Meters)", "Length", "Width"]
+#   defaults = ["3", "3", "3"]
+#   input = UI.inputbox(prompts, defaults, "How to Gen Room")
+#   draw_room input
+#   do_options
+# end

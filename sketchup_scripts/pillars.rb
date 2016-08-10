@@ -8,11 +8,7 @@ require 'sketchup.rb'
 
 # Add a menu item to launch our plugin.
 UI.menu("Plugins").add_item("Make Collumns") {
-  SKETCHUP_CONSOLE.show
-  prompts = ["Height (Meters)", "Side", "Grid Length(Num Collumns)", "Grid Width", "Spacing"]
-  defaults = ["3", ".5", "5", "5", ".5"]
-  input = UI.inputbox(prompts, defaults, "How to Gen Collumns")
-  draw_collumns input
+  pillars_prompt
 }
 
 def draw_collumns(input)
@@ -37,4 +33,12 @@ def draw_collumns(input)
       face.pushpull -1*height
     end
   end
+end
+
+def pillars_prompt
+  SKETCHUP_CONSOLE.show
+  prompts = ["Height (Meters)", "Side", "Grid Length(Num Collumns)", "Grid Width", "Spacing"]
+  defaults = ["3", ".5", "5", "5", ".5"]
+  input = UI.inputbox(prompts, defaults, "How to Gen Collumns")
+  draw_collumns input
 end
