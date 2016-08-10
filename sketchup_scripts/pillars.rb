@@ -15,6 +15,7 @@ def draw_collumns(input)
   # Get handles to our model and the Entities collection it contains.
   model = Sketchup.active_model
   entities = model.entities
+  entities.clear!
   height = input[0].to_f.m
   side = input[1].to_f.m
   length = input[2].to_f

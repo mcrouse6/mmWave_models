@@ -27,8 +27,7 @@ def draw_rooms(input)
     pt4 = [0,scaled_width,0]
     face = entities.add_face pt1, pt2, pt3, pt4
     face.pushpull -1*scaled_height
-    puts File.join(input[7], "#{scaled_length.to_m}x#{scaled_width.to_m}x#{scaled_height.to_m}.stl")
-    export File.join(input[7], "#{scaled_length.to_m}x#{scaled_width.to_m}x#{scaled_height.to_m}.stl")
+    export File.join(input[7], "#{scaled_length.to_m}x#{scaled_width.to_m}x#{scaled_height.to_m}_room.stl")
     entities.clear!
   end
 end
