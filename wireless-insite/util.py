@@ -1,13 +1,29 @@
 import numpy as np
 import pandas as pd
 from sqlalchemy import create_engine
+import os
+from glob import glob
 
-
-def load_pathloss(fn, exp_id):
+def load_pathloss(fn):
     dat = pd.read_csv(fn,header=None, names=['id', 'x', 'y','z', 'distance', 'pathloss'], skiprows=2, delimiter=' ',
                       index_col=0)
-    dat['exp_id'] = exp_id
     return dat
+def pl_to_array(indir, outdir, columnNo, absolutein=True, absoluteout=False):
+    if not absolutein:
+        indir = os.path.join(os.getcwd(), indir)
+    if not absoluteout:
+        outdir = os.path.join(os.getcwd(), outdir)
+    try:
+        os.stat(outdir)
+    except:
+        os.mkdir(outdir)
+    for fn in glob(os.path.join(indir, "*.pl*")):
+        cur = load_pathloss(fn)
+        cur.pop("z")
+        cur.pop("distance")
+        tx = fn.split(".pl.t")[-1].split("_")[0]
+        with open(os.path.join(outdir, "column_%s-tx_%s" % (columnNo, tx)), mode="w+") as out:
+            np.save(out,cur.as_matrix())
 
 def to_sql(df, table):
     disk_engine = create_engine('sqlite:///ray_tracing.db')
