@@ -1,5 +1,6 @@
 # First we pull in the standard API hooks.
 require 'sketchup.rb'
+require 'exporter'
 
 # Show the Ruby Console at startup so we can
 # see any programming errors we may make.
@@ -34,12 +35,15 @@ def draw_collumns(input)
       face.pushpull -1*height
     end
   end
+  num_columns = (length*width).round
+  export File.join(input[5], "#{num_columns}_#{side.to_m}msq_x#{height.to_m}_collumn.stl")
+  entities.clear!
 end
 
 def pillars_prompt
   SKETCHUP_CONSOLE.show
-  prompts = ["Height (Meters)", "Side", "Grid Length(Num Collumns)", "Grid Width", "Spacing"]
-  defaults = ["3", ".5", "5", "5", ".5"]
+  prompts = ["Height (Meters)", "Side", "Grid Length(Num Collumns)", "Grid Width", "Spacing", "Output Dir"]
+  defaults = ["3", ".5", "5", "5", ".5", "C:/Users/aians/Desktop"]
   input = UI.inputbox(prompts, defaults, "How to Gen Collumns")
   draw_collumns input
 end
